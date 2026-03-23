@@ -48,7 +48,7 @@ instance ScalarInput Rational where
   parseScalar line = 
     case readMaybe (map (\c -> if c == '/' then '%' else c) line) of
       Just r  -> Just r
-      Nothing -> toRational <$> (readMaybe line :: Maybe Double)
+      Nothing -> fmap toRational (readMaybe line :: Maybe Double)
 
 readInput :: forall a. ScalarInput a => String -> IO a
 readInput prompt = do

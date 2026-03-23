@@ -19,7 +19,7 @@ data AbacusState = AbacusState
 type Abacus = StateT AbacusState IO
 updateAbacus :: Maybe (V.Vector (V.Vector Rational)) -> String -> Abacus ()
 updateAbacus res step = case res of
-  Nothing -> liftIO $ putStrLn "[ERROR] Index out of bounds!"
+  Nothing         -> liftIO $ putStrLn "[ERROR] Index out of bounds!"
   Just nextMatrix -> modify \st -> st 
     { steps = step : steps st
     , matrix = nextMatrix 
@@ -85,7 +85,7 @@ bead = do
   opt <- liftIO $ readInput "Operation [1, 3]: " :: Abacus Int
   
   case opt of
-    1 -> do
+    1 -> do -- (1) Swap Rows
       liftIO $ putStrLn "[SELECTED] (1) Swap Rows: `R_{A} ↔ R_{B}`"
 
       a <- liftIO $ readInput ("Row A [1, " ++ show (V.length m) ++ "]: ") :: Abacus Int
@@ -95,7 +95,7 @@ bead = do
       let bIdx = b - 1
 
       updateAbacus (swapRows aIdx bIdx m) ("`R_{" ++ show a ++ "} ↔ R_{" ++ show b ++ "}`")
-    2 -> do
+    2 -> do -- (2) Multiply Row
       liftIO $ putStrLn "[SELECTED] (2) Multiply Row: `C * R_{A} → R_{A}`"
 
       c <- liftIO $ readInput "Constant C: " :: Abacus Rational
@@ -104,7 +104,7 @@ bead = do
       let aIdx = a - 1
 
       updateAbacus (multiplyRow c aIdx m) ("`" ++ showRational c ++ " * R_{" ++ show a ++ "} → R_{" ++ show a ++ "}`")
-    3 -> do
+    3 -> do -- (3) Row Replacement
       liftIO $ putStrLn "[SELECTED] (3) Row Replacement: `C * R_{A} + R_{B} → R_{B}`"
 
       c <- liftIO $ readInput "Constant C: " :: Abacus Rational

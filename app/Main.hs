@@ -54,6 +54,7 @@ readInput :: forall a. ScalarInput a => String -> IO a
 readInput prompt = do
   putStr prompt
   hFlush stdout
+
   line <- getLine
   case parseScalar line of
     Just n  -> pure n

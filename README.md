@@ -3,7 +3,7 @@
 Great for double checking work and is basically a CLI port of https://textbooks.math.gatech.edu/ila/demos/rrinter.html for quick & efficient use.
 
 ## Build
-It's written in Haskell using Cabal so just use `cabal run` to compile & run immediately or `cabal build` to compile & run the executable located in `dist-newstyle/build`
+It's written in Haskell using Cabal so just use `cabal run` to compile & run immediately or `cabal build` to compile & run the executable located in `dist-newstyle/build`.
 
 ## Purpose
 It's **not** a matrix calculator and purposely not so since those are clunky, slow, and oftentimes do more than you should have access to. <br/>
